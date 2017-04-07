@@ -192,6 +192,10 @@ class SearchEngine:
                 match_rank.append((i,len(set(q)),len(set(uq))))
                 indices.append(i)
 
+	# no results found
+	if len(indices) == 0:
+	    return []
+
         # pagerank on subnetwork
         subnet = self._subnetwork(indices)
         index_dict = {indices[i]:i for i in range(len(indices))}
@@ -272,31 +276,13 @@ class SearchEngine:
     _url_index = {}
     _word_dict = {}
 
-import math
-import matplotlib.pyplot as plt
-# function plot_network
-# gives visualization of directed network
-def plot_network(N):
-    n = len(N)
-    x = np.array([None]*n)
-    y = np.array([None]*n)
-    for i in range(n):
-        x[i] = math.cos(2*math.pi*i/n)
-        y[i] = math.sin(2*math.pi*i/n)
-    for i in range(n):
-        for j in range(n):
-            if N[i][j] > 0:
-                plt.quiver(x[i], y[i], x[j] - x[i], y[j] - y[i], scale_units='xy', angles='xy', scale=1)
-    plt.plot(x,y,'o',label = [i for i in range(n)])
     
-def main():
-    english_dict = urllib2.urlopen('http://mieliestronk.com/corncob_lowercase.txt').read().decode('utf-8').split()
-    # personal fake internet
-    urls = ''
-    for i in range(20):
-        #personal website might be out of order
-        urls += 'http://pic.ucla.edu/~dpnguyen/pic16/page%d.html ' %i
+english_dict = urllib2.urlopen('http://mieliestronk.com/corncob_lowercase.txt').read().decode('utf-8').split()
+# personal fake internet
+urls = ''
+for i in range(20):
+	#personal website might be out of order
+	urls += 'http://pic.ucla.edu/~dpnguyen/pic16/page%d.html ' %i
 
-    cool_engine = SearchEngine(urls,english_dict)
-    cool_engine.query('coffee "money" beans taes lef price', 5)
-    return
+cool_engine = SearchEngine(urls,english_dict)
+cool_engine.query('coffee "money" beans taes lef price', 5)
