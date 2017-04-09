@@ -7,7 +7,7 @@ Jokes...
 
 Problem Description (from http://www.math.ucla.edu/~rombach/PIC16_project2.pdf):
 
-Create a mini search engine. This engine uses a list of urls as its “internet
+Create a mini search engine. This engine uses a list of urls as its “internet"
 
 •Your engine needs to create a network based on links between the pages which will be in thesource code of any page)
 
